@@ -4,6 +4,7 @@ import { Function, Runtime, AssetCode } from '@aws-cdk/aws-lambda';
 import { Role, ServicePrincipal, PolicyDocument, PolicyStatement, Effect, ManagedPolicy } from '@aws-cdk/aws-iam';
 // import { CfnSecret } from '@aws-cdk/aws-secretsmanager';
 import * as path from 'path'
+import { addCorsOptions } from './cors';
 
 interface Props {
     restApi: RestApi
@@ -24,7 +25,7 @@ export class Lambda extends Construct {
             ]
         });
 
-        const handler = new Function(this, 'CreateRepo', {
+        const handler = new Function(this, 'test1', {
             runtime: Runtime.NODEJS_10_X,
             handler: 'lib/test.handler',
             role,
@@ -36,12 +37,18 @@ export class Lambda extends Construct {
             principal: new ServicePrincipal('apigateway.amazonaws.com')
         })
         
+        //Create resource
         const test = this.props.restApi.root.addResource('test');
 
+        //Add CORS to resource
+        addCorsOptions(test)
+
         //Create Method in API Gateway with our Lambda attached
-        const method = test.addMethod('POST', new LambdaIntegration(handler), { 
-            authorizationType: AuthorizationType.CUSTOM
+        const method = test.addMethod('GET', new LambdaIntegration(handler)
+        //, { 
+            //authorizationType: AuthorizationType.CUSTOM
             // authorizer: { authorizerId: this.props.authorizer.ref } 
-        })
+        //}
+        )
     }
 }

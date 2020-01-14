@@ -8,17 +8,19 @@ export class dwsStack extends cdk.Stack {
     super(scope, id, props);
 
     const restApi = new RestApi(this, 'dws-api');
-    const test =  restApi.root.addResource('/test');
+    //const test =  restApi.root.addResource('test');
+    //const testMethod = test.addMethod('GET');
 
     //Add Mock Integrations
     addCorsOptions(restApi.root)
-    addCorsOptions(test)
 
-    //const Authorizer = new CLIAuthorizer(this, 'CLIAuthorizer', { restApi })
-        
-    new Lambda(this, 'NewrelicLambda', {
+
+    //const Authorizer = new DwsAuthorizer(this, 'DwsAuthorizer', { restApi })
+    
+    //Resource, method, lambda in below class
+    new Lambda(this, 'DwsLambda', {
         restApi,
-        //authorizer: cliAuthorizer.authorizer
+        //authorizer: DwsAuthorizer.authorizer
     })
   }
 }
