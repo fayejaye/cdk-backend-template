@@ -1,0 +1,7 @@
+{
+    "app": "ts-node src/cdk/dwsApp.ts",
+    "requireApproval": "never",
+    "versionReporting": false,
+    "toolkitStackName": "dws-app-assets"
+  }
+  

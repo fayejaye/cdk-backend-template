@@ -1,0 +1,13 @@
+# Dependency directories
+node_modules
+lib
+
+# CDK
+cdk.out
+
+# Generated JS files 
+*.d.ts
+
+coverage
+
+dws.zip
