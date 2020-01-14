@@ -27,7 +27,7 @@ export class Lambda extends Construct {
 
         const handler = new Function(this, 'test1', {
             runtime: Runtime.NODEJS_10_X,
-            handler: 'lib/test.handler',
+            handler: 'lib/lambdas/test.handler',
             role,
             code: AssetCode.fromAsset(path.join(__dirname, '../..', 'dws-backend.zip')),
         })
