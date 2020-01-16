@@ -2,7 +2,14 @@
   "name": "dws-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "scripts": {
+    "build": "tsc --project tsconfig.prod.json && lambda-zip .package-include dws-backend.zip",
+    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
+    "bootstrap": "cdk bootstrap",
+    "deploy": "cdk deploy",
+    "synth": "cdk synth",
+    "test": "jest"
+  },
   "devDependencies": {
     "@aws-cdk/aws-apigateway": "^1.19.0",
     "@aws-cdk/aws-lambda": "^1.19.0",
@@ -10,18 +17,12 @@
     "@types/aws-lambda": "^8.10.39",
     "@types/node": "^13.1.6",
     "aws-cdk": "^1.19.0",
-    "axios": "^0.19.1",
     "lambda-zip": "^0.3.1",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.2"
   },
-  "scripts": {
-    "build": "tsc --project tsconfig.prod.json && lambda-zip dws.zip",
-    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
-    "bootstrap": "cdk bootstrap",
-    "deploy": "cdk deploy",
-    "synth": "cdk synth",
-    "test": "jest"
+  "dependencies": {
+    "axios": "^0.19.1"
   },
   "author": "",
   "license": "ISC"

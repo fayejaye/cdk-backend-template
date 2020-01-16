@@ -2,7 +2,6 @@
 import Axios, { AxiosResponse, AxiosError } from "axios"
 import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda"
 import { lambdaResponse } from "./helper"
-import { API_GATEWAY_URL } from "./constants"
 
 interface Props {
     name: string; // input from user
@@ -23,13 +22,13 @@ export const handler = async (event: APIGatewayEvent): Promise<APIGatewayProxyRe
     const props = JSON.parse(event.body) as Props
     
     try {
-        // const response = await Axios.post(API_GATEWAY_URL, {
+        // const response = await Axios.post(process.env.API_URL, {
         //     browser_application: { name: props.name }
         // }, requestConfig(props.name)) as AxiosResponse<Response>
       
         // const data = response.data
-        const data = 'Hello World'
-        return lambdaResponse(200, { data })
+        const data = 'Hello World!!!'
+        return lambdaResponse(200, { body: data })
     
     } catch(e) {
         const { response: { status, data } } = e as AxiosError

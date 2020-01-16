@@ -1,4 +1,4 @@
-import { Construct } from "@aws-cdk/core";
+import { Construct, Duration } from "@aws-cdk/core";
 import { RestApi, LambdaIntegration, AuthorizationType, CfnAuthorizer } from '@aws-cdk/aws-apigateway'
 import { Function, Runtime, AssetCode } from '@aws-cdk/aws-lambda';
 import { Role, ServicePrincipal, PolicyDocument, PolicyStatement, Effect, ManagedPolicy } from '@aws-cdk/aws-iam';
@@ -25,9 +25,11 @@ export class Lambda extends Construct {
             ]
         });
 
+        //Test Lambda
         const handler = new Function(this, 'test1', {
             runtime: Runtime.NODEJS_10_X,
             handler: 'lib/lambdas/test.handler',
+            timeout: Duration.minutes(1),
             role,
             code: AssetCode.fromAsset(path.join(__dirname, '../..', 'dws-backend.zip')),
         })
@@ -37,13 +39,13 @@ export class Lambda extends Construct {
             principal: new ServicePrincipal('apigateway.amazonaws.com')
         })
         
-        //Create resource
+        //Create resources
         const test = this.props.restApi.root.addResource('test');
 
-        //Add CORS to resource
+        //Add CORS to resources
         addCorsOptions(test)
 
-        //Create Method in API Gateway with our Lambda attached
+        //Create Method in API Gateway with the Lambda attached
         const method = test.addMethod('GET', new LambdaIntegration(handler)
         //, { 
             //authorizationType: AuthorizationType.CUSTOM
