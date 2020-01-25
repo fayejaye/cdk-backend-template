@@ -26,12 +26,12 @@ export class Lambda extends Construct {
         });
 
         //Test Lambda
-        const handler = new Function(this, 'test1', {
+        const handler = new Function(this, 'test-webpack', {
             runtime: Runtime.NODEJS_10_X,
-            handler: 'lib/lambdas/test.handler',
+            handler: 'test.handler',
             timeout: Duration.minutes(1),
             role,
-            code: AssetCode.fromAsset(path.join(__dirname, '../..', 'dws-backend.zip')),
+            code: AssetCode.fromAsset(path.join(__dirname, '../..', 'lib/test')),
         })
         
         handler.addPermission('ApiGatewayInvocation', {

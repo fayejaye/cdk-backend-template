@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "tsc --project tsconfig.prod.json && lambda-zip .package-include dws-backend.zip",
+    "build": "tsc --project tsconfig.prod.json && npx webpack",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
     "bootstrap": "cdk bootstrap",
     "deploy": "cdk deploy",
