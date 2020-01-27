@@ -15,6 +15,9 @@ const moduleLoaders = {
 }
 const resolve = {
   extensions: [ '.ts', '.js' ],
+  alias: {
+    'pg-native': './pg-native-dummy.js'
+  }
 }
 const target = 'node'
 const mode = 'development'
@@ -36,4 +39,21 @@ const test = {
   }
 };
 
-module.exports = [test]
+const test2 = {
+  entry: path.resolve(__dirname, 'src/test2.ts'),
+  devtool,
+  target,
+  module: moduleLoaders,
+  externals,
+  mode,
+  resolve,
+  plugins: [
+  ],
+  output: {
+    filename: 'app.js',
+    path: path.resolve(__dirname, 'dist/test2'),
+    libraryTarget: 'commonjs'
+  }
+};
+
+module.exports = [test, test2]

@@ -1,40 +1,14 @@
+const moment = require('moment')
+module.exports.handler = function(event, context, callback) {
+const a = moment().toDate();
+const response = {
+  statusCode: 200,
+  headers: {
+    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+    "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS 
+  },
+  body: JSON.stringify({ "message": `${a}- Faye` })
+};
 
-import Axios, { AxiosResponse, AxiosError } from "axios"
-import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda"
-import { lambdaResponse } from "./helper"
-
-interface Props {
-    name: string; // input from user
-}
-
-interface Response  {
-    message: string; //If error, a message is returned
-}
-
-const requestConfig = (apiKey: string) => ({
-    headers: { 
-        //'X-Api-Key': apiKey,
-        'Accept': 'application/json' 
-    }
-})
-
-export const handler = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
-    const props = JSON.parse(event.body) as Props
-    
-    try {
-        // const response = await Axios.post(process.env.API_URL, {
-        //     browser_application: { name: props.name }
-        // }, requestConfig(props.name)) as AxiosResponse<Response>
-      
-        // const data = response.data
-        const data = 'Hello World!!!'
-        return lambdaResponse(200, { body: data })
-    
-    } catch(e) {
-        const { response: { status, data } } = e as AxiosError
-        
-        console.log(`Received error: `, data)
-        
-        return lambdaResponse(status, { message: `Unexpected error occurred with status code ${status}` })
-    }
-}
+callback(null, response);
+};

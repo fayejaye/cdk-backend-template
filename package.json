@@ -11,18 +11,24 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@aws-cdk/aws-apigateway": "^1.19.0",
-    "@aws-cdk/aws-lambda": "^1.19.0",
-    "@aws-cdk/core": "^1.19.0",
-    "@types/aws-lambda": "^8.10.39",
-    "@types/node": "^13.1.6",
-    "aws-cdk": "^1.19.0",
+    "@aws-cdk/aws-apigateway": "^1.21.0",
+    "@aws-cdk/aws-lambda": "^1.21.0",
+    "@aws-cdk/aws-secretsmanager": "^1.21.0",
+    "@aws-cdk/core": "^1.21.0",
+    "@types/aws-lambda": "^8.10.40",
+    "@types/node": "^13.5.0",
     "lambda-zip": "^0.3.1",
+    "ts-loader": "^6.2.1",
     "ts-node": "^8.6.2",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5"
   },
   "dependencies": {
-    "axios": "^0.19.1"
+    "aws-sdk": "^2.610.0",
+    "axios": "^0.19.2",
+    "moment": "^2.24.0",
+    "pg": "^7.17.1",
+    "random-number": "0.0.9"
   },
   "author": "",
   "license": "ISC"

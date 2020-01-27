@@ -1,0 +1,1 @@
+export const PostgreSQLPW_Secret_Name = "PostgreSQL_PW"
