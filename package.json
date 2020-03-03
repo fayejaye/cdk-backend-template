@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "tsc --project tsconfig.prod.json && lambda-zip .package-include dws-backend.zip",
+    "build": "tsc --project tsconfig.prod.json && npx webpack",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
     "bootstrap": "cdk bootstrap",
     "deploy": "cdk deploy",
@@ -11,18 +11,22 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@aws-cdk/aws-apigateway": "^1.19.0",
-    "@aws-cdk/aws-lambda": "^1.19.0",
-    "@aws-cdk/core": "^1.19.0",
-    "@types/aws-lambda": "^8.10.39",
-    "@types/node": "^13.1.6",
-    "aws-cdk": "^1.19.0",
-    "lambda-zip": "^0.3.1",
+    "@aws-cdk/aws-apigateway": "^1.22.0",
+    "@aws-cdk/aws-dynamodb": "^1.22.0",
+    "@aws-cdk/aws-lambda": "^1.22.0",
+    "@aws-cdk/core": "^1.22.0",
+    "@types/aws-lambda": "*",
+    "@types/node": "*",
+    "aws-cdk": "^1.22.0",
+    "ts-loader": "^6.2.1",
     "ts-node": "^8.6.2",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "axios": "^0.19.1"
+    "aws-sdk": "^2.610.0",
+    "axios": "^0.19.2"
   },
   "author": "",
   "license": "ISC"

@@ -4,7 +4,7 @@ import { dwsStack } from './dwsStack';
 const app = new App();
 new dwsStack(app, 'dws-stack',{
     env:{
-        region: 'us-east-2',
+        region: 'ap-southeast-2',
         account: '313944524791'   
     }
 });
