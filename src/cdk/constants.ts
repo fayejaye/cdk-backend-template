@@ -1,1 +1,1 @@
-export const PostgreSQLPW_Secret_Name = 'PostgreSQL_PW'
+export const DYNAMODB_TABLENAME = 'to-do-list'

@@ -1,7 +1,9 @@
 import cdk = require('@aws-cdk/core');
 import { RestApi, MethodLoggingLevel, LambdaIntegration, AuthorizationType, CfnAuthorizer } from '@aws-cdk/aws-apigateway'
 import { Lambda } from './Lambda';
+import { Dynamo } from './Dynamo';
 import { addCorsOptions } from './cors';
+import { DynamoDB } from 'aws-sdk';
 
 export class dwsStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -13,19 +15,17 @@ export class dwsStack extends cdk.Stack {
       dataTraceEnabled: true
     }
   });
-    //const test =  restApi.root.addResource('test');
-    //const testMethod = test.addMethod('GET');
-
     //Add Mock Integrations
     addCorsOptions(restApi.root)
 
-
     //const Authorizer = new DwsAuthorizer(this, 'DwsAuthorizer', { restApi })
     
-    //Resource, method, lambda in below class
     new Lambda(this, 'DwsLambda', {
         restApi,
         //authorizer: DwsAuthorizer.authorizer
     })
+
+    new Dynamo(this, 'DwsDynamo')
+
   }
 }

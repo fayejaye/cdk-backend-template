@@ -1,14 +1,18 @@
-const moment = require('moment')
-module.exports.handler = function(event, context, callback) {
-const a = moment().toDate();
-const response = {
-  statusCode: 200,
-  headers: {
-    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-    "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS 
-  },
-  body: JSON.stringify({ "message": `${a}- Faye` })
-};
+'use strict';
+import { DynamoDB } from 'aws-sdk'
+import { DYNAMODB_TABLENAME } from './cdk/constants'
+import { lambdaResponse } from './helper'
+var docClient = new DynamoDB.DocumentClient({ region: 'ap-southeast-2' });
 
-callback(null, response);
-};
+module.exports.handler = async function() {
+  try{
+    let res = await docClient.get({TableName: DYNAMODB_TABLENAME,
+    Key: { userId:'1', headerId:'1'}}).promise();
+    let database_item = res.Item;
+    return lambdaResponse(201, database_item )
+  }
+  catch (err){
+    console.log("Error and Code: ",err.message)
+    return lambdaResponse(err.code, { message: err.message })
+  }
+}
